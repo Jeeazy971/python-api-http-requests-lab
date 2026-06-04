@@ -1,0 +1,87 @@
+# =========================
+# Python cache
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# =========================
+# Virtual environments
+# =========================
+.venv/
+venv/
+env/
+ENV/
+
+
+# =========================
+# Python packaging / build
+# =========================
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+
+# =========================
+# Dependencies / lock files optional
+# =========================
+# Garde requirements.txt versionné
+# Ne pas ignorer requirements.txt
+
+
+# =========================
+# Environment variables / secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+
+# =========================
+# IDE / editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+
+# =========================
+# Test / coverage
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+
+# =========================
+# Type checkers / linters
+# =========================
+.mypy_cache/
+.ruff_cache/
+.pyright/
+
+
+# =========================
+# Generated output files
+# =========================
+data/output/

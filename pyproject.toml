@@ -2,5 +2,5 @@
 name = "python-api-http-requests-lab"
 description = "Python learning project focused on API, HTTP fundamentals, requests, JSON responses, error handling, and API data processing before learning FastAPI."
 version = "0.1.0"
-requires-python = ">= 3.14"
+requires-python = ">= 3.13"
 dependencies = ["requests"]

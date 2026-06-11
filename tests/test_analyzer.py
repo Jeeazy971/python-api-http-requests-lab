@@ -73,3 +73,21 @@ def test_find_lowest_stock_product_returns_product_when_there_is_one_product():
     result = find_lowest_stock_product(SINGLE_PRODUCT)
 
     assert result == SINGLE_PRODUCT[0]
+
+
+def test_calculate_average_price_returns_none_when_products_are_empty():
+    result = calculate_average_price([])
+
+    assert result is None
+
+
+def test_find_most_expensive_product_returns_none_when_products_are_empty():
+    result = find_most_expensive_product([])
+
+    assert result is None
+
+
+def test_find_lowest_stock_product_returns_none_when_products_are_empty():
+    result = find_lowest_stock_product([])
+
+    assert result is None

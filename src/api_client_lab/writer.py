@@ -1,7 +1,10 @@
 from pathlib import Path
 
-def save_report(report_content):
-    report_folder = Path("data") / "output" / "reports"
+
+def save_report(report_content, report_folder=None):
+    if report_folder is None:
+        report_folder = Path("data") / "output" / "reports"
+
     report_folder.mkdir(parents=True, exist_ok=True)
     api_products_report_file = report_folder / "api_products_report.txt"
 

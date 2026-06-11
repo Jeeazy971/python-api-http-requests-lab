@@ -2,7 +2,6 @@ import pytest
 
 from api_client_lab.analyzer import calculate_average_price, find_lowest_stock_product, find_most_expensive_product
 
-
 PRODUCTS = [
     {
         "id": 1,

@@ -27,11 +27,95 @@ PRODUCTS = [
     },
 ]
 
+TWO_PRODUCTS = [
+    {
+        "id": 1,
+        "title": "Notebook",
+        "category": "office",
+        "price": 10,
+        "stock": 20,
+    },
+    {
+        "id": 2,
+        "title": "Desk Lamp",
+        "category": "office",
+        "price": 30,
+        "stock": 7,
+    },
+]
 
-def test_calculate_average_price_returns_average_product_price():
-    result = calculate_average_price(PRODUCTS)
+SINGLE_PRODUCT = [
+    {
+        "id": 1,
+        "title": "USB Cable",
+        "category": "accessories",
+        "price": 15,
+        "stock": 8,
+    }
+]
 
-    assert result == pytest.approx(90.0)
+PRODUCTS_WITH_MISSING_PRICE = [
+    {
+        "id": 1,
+        "title": "Keyboard",
+        "category": "electronics",
+        "price": 50,
+        "stock": 12,
+    },
+    {
+        "id": 2,
+        "title": "Mouse",
+        "category": "electronics",
+        "stock": 30,
+    },
+]
+
+PRODUCTS_WITH_MISSING_STOCK = [
+    {
+        "id": 1,
+        "title": "Keyboard",
+        "category": "electronics",
+        "price": 50,
+        "stock": 12,
+    },
+    {
+        "id": 2,
+        "title": "Mouse",
+        "category": "electronics",
+    },
+]
+
+PRODUCTS_WITH_ZERO_PRICE = [
+    {
+        "id": 1,
+        "title": "Free Sticker",
+        "category": "accessories",
+        "price": 0,
+        "stock": 100,
+    },
+    {
+        "id": 2,
+        "title": "USB Hub",
+        "category": "accessories",
+        "price": 50,
+        "stock": 15,
+    },
+]
+
+
+@pytest.mark.parametrize(
+    "products, expected_average",
+    [
+        (PRODUCTS, 90.0),
+        (SINGLE_PRODUCT, 15.0),
+        (TWO_PRODUCTS, 20.0),
+        (PRODUCTS_WITH_ZERO_PRICE, 25.0),
+    ],
+)
+def test_calculate_average_price_returns_expected_average(products, expected_average):
+    result = calculate_average_price(products)
+
+    assert result == pytest.approx(expected_average)
 
 
 def test_find_most_expensive_product_returns_product_with_highest_price():
@@ -44,23 +128,6 @@ def test_find_lowest_stock_product_returns_product_with_smallest_stock():
     result = find_lowest_stock_product(PRODUCTS)
 
     assert result == PRODUCTS[2]
-
-
-SINGLE_PRODUCT = [
-    {
-        "id": 1,
-        "title": "USB Cable",
-        "category": "accessories",
-        "price": 15,
-        "stock": 8,
-    }
-]
-
-
-def test_calculate_average_price_returns_product_price_when_there_is_one_product():
-    result = calculate_average_price(SINGLE_PRODUCT)
-
-    assert result == pytest.approx(15.0)
 
 
 def test_find_most_expensive_product_returns_product_when_there_is_one_product():
@@ -93,42 +160,9 @@ def test_find_lowest_stock_product_returns_none_when_products_are_empty():
     assert result is None
 
 
-PRODUCTS_WITH_MISSING_PRICE = [
-    {
-        "id": 1,
-        "title": "Keyboard",
-        "category": "electronics",
-        "price": 50,
-        "stock": 12,
-    },
-    {
-        "id": 2,
-        "title": "Mouse",
-        "category": "electronics",
-        "stock": 30,
-    },
-]
-
-
 def test_calculate_average_price_raises_key_error_when_price_is_missing():
     with pytest.raises(KeyError):
         calculate_average_price(PRODUCTS_WITH_MISSING_PRICE)
-
-
-PRODUCTS_WITH_MISSING_STOCK = [
- {
-        "id": 1,
-        "title": "Keyboard",
-        "category": "electronics",
-        "price": 50,
-        "stock": 12,
-    },
-    {
-        "id": 2,
-        "title": "Mouse",
-        "category": "electronics",
-    },
-]
 
 
 def test_find_most_expensive_product_raises_key_error_when_price_is_missing():

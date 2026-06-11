@@ -91,3 +91,51 @@ def test_find_lowest_stock_product_returns_none_when_products_are_empty():
     result = find_lowest_stock_product([])
 
     assert result is None
+
+
+PRODUCTS_WITH_MISSING_PRICE = [
+    {
+        "id": 1,
+        "title": "Keyboard",
+        "category": "electronics",
+        "price": 50,
+        "stock": 12,
+    },
+    {
+        "id": 2,
+        "title": "Mouse",
+        "category": "electronics",
+        "stock": 30,
+    },
+]
+
+
+def test_calculate_average_price_raises_key_error_when_price_is_missing():
+    with pytest.raises(KeyError):
+        calculate_average_price(PRODUCTS_WITH_MISSING_PRICE)
+
+
+PRODUCTS_WITH_MISSING_STOCK = [
+ {
+        "id": 1,
+        "title": "Keyboard",
+        "category": "electronics",
+        "price": 50,
+        "stock": 12,
+    },
+    {
+        "id": 2,
+        "title": "Mouse",
+        "category": "electronics",
+    },
+]
+
+
+def test_find_most_expensive_product_raises_key_error_when_price_is_missing():
+    with pytest.raises(KeyError):
+        find_most_expensive_product(PRODUCTS_WITH_MISSING_PRICE)
+
+
+def test_find_lowest_stock_product_raises_key_error_when_stock_is_missing():
+    with pytest.raises(KeyError):
+        find_lowest_stock_product(PRODUCTS_WITH_MISSING_STOCK)

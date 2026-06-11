@@ -1,12 +1,12 @@
 # Python API Client Lab
 
-A progressive Python learning project focused on consuming HTTP APIs with `requests`, handling JSON responses, analyzing API data, and generating local reports.
+A progressive Python learning project focused on consuming HTTP APIs with `requests`, handling JSON responses, analyzing API data, generating local reports, and testing a small Python package with `pytest`.
 
-The project starts with small isolated exercises and ends with a refactored API client package using a clean `src/` structure.
+The project starts with small isolated exercises and ends with a refactored API client package using a clean `src/` structure and a dedicated unit test suite.
 
 ## Project goals
 
-This project was built to strengthen the fundamentals of API consumption in Python.
+This project was built to strengthen the fundamentals of API consumption in Python, then consolidate the code through modular architecture and unit testing.
 
 It covers:
 
@@ -23,6 +23,7 @@ It covers:
 - reusable API client functions
 - saving API data into local files
 - refactoring a script into a structured Python package
+- writing unit tests with pytest
 ```
 
 ## Features
@@ -37,6 +38,7 @@ It covers:
 - Generate a text report from API data
 - Save the generated report with pathlib
 - Organize the final code into a reusable package
+- Test package behavior with pytest
 ```
 
 ## Project structure
@@ -64,6 +66,11 @@ python-api-http-requests-lab/
 │       ├── report.py
 │       ├── writer.py
 │       └── main.py
+├── tests/
+│   ├── test_analyzer.py
+│   ├── test_client.py
+│   ├── test_report.py
+│   └── test_writer.py
 ├── data/
 │   └── output/
 │       └── reports/
@@ -93,6 +100,7 @@ This structure keeps the code easier to read, test, maintain, and extend.
 ```text
 Python 3.x
 requests
+pytest
 ```
 
 Install dependencies with:
@@ -136,6 +144,42 @@ Example report path:
 data/output/reports/api_products_report.txt
 ```
 
+## Tests
+
+The project includes a pytest test suite covering the main package responsibilities:
+
+```text
+test_analyzer.py → tests pure analysis functions, edge cases, parametrize, fixtures, and expected errors
+test_report.py   → tests report text generation through important content assertions
+test_writer.py   → tests file writing with tmp_path without polluting the real project folders
+test_client.py   → tests API client behavior with monkeypatch without calling the real API
+```
+
+Run all tests from the project root:
+
+```bash
+PYTHONPATH=src pytest -q
+```
+
+For a detailed test report:
+
+```bash
+PYTHONPATH=src pytest
+```
+
+The current test suite validates:
+
+```text
+- happy paths
+- edge cases
+- missing-field errors with pytest.raises
+- floating-point comparisons with pytest.approx
+- repeated input cases with pytest.mark.parametrize
+- reusable test data with pytest fixtures
+- temporary file writing with tmp_path
+- API behavior simulation with monkeypatch
+```
+
 ## Learning outcomes
 
 This project validates the ability to:
@@ -152,13 +196,16 @@ This project validates the ability to:
 - structure Python code into modules
 - separate responsibilities across a package
 - run a package with python -m
+- write useful unit tests with pytest
+- test pure functions, file writing, report generation, and API client behavior
+- isolate external dependencies in tests with monkeypatch
 ```
 
 ## Status
 
-The main learning module is complete.
+The main API learning module and the pytest mini-module are complete.
 
-Completed blocks:
+Completed API blocks:
 
 ```text
 01 - HTTP basics
@@ -176,13 +223,27 @@ Completed blocks:
 13 - Refactor into src package
 ```
 
+Completed pytest blocks:
+
+```text
+01 - First unit tests with pytest
+02 - Edge cases and expected errors
+03 - Parametrized tests with pytest.mark.parametrize
+04 - Fixtures with pytest.fixture
+05 - Report generation unit test
+06 - File writer test with tmp_path
+07 - API client tests with monkeypatch
+08 - Test suite consolidation and README documentation
+```
+
 ## Possible next improvements
 
 ```text
-- add unit tests
-- add stronger error handling
-- move API base URL into a configuration file
+- add stronger API error handling
+- move the API base URL into a configuration file
 - support multiple product categories
 - export reports as JSON or CSV
-- package the project with pyproject.toml
+- add GitHub Actions to run pytest automatically
+- add test coverage reporting
+- package the project more fully with pyproject.toml
 ```

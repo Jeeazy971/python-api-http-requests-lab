@@ -1,12 +1,12 @@
 # Python API Client Lab
 
-Projet d’apprentissage Python progressif consacré à la consommation d’APIs HTTP avec `requests`, au traitement de réponses JSON, à l’analyse de données API et à la génération de rapports locaux.
+Projet d’apprentissage Python progressif consacré à la consommation d’APIs HTTP avec `requests`, au traitement de réponses JSON, à l’analyse de données API, à la génération de rapports locaux et aux tests unitaires avec `pytest`.
 
-Le projet commence par des exercices isolés, puis se termine par un refactor en package Python structuré avec une architecture `src/`.
+Le projet commence par des exercices isolés, puis se termine par un refactor en package Python structuré avec une architecture `src/` et une suite de tests dédiée.
 
 ## Objectifs du projet
 
-Ce projet a été conçu pour consolider les bases de la consommation d’API en Python.
+Ce projet a été conçu pour consolider les bases de la consommation d’API en Python, puis renforcer le code grâce à une architecture modulaire et à des tests unitaires.
 
 Il couvre :
 
@@ -23,6 +23,7 @@ Il couvre :
 - les fonctions client API réutilisables
 - la sauvegarde de données API dans des fichiers locaux
 - le refactor d’un script en package Python structuré
+- l’écriture de tests unitaires avec pytest
 ```
 
 ## Fonctionnalités
@@ -37,6 +38,7 @@ Il couvre :
 - générer un rapport texte à partir des données API
 - sauvegarder le rapport avec pathlib
 - organiser le code final dans un package réutilisable
+- tester le comportement du package avec pytest
 ```
 
 ## Structure du projet
@@ -64,6 +66,11 @@ python-api-http-requests-lab/
 │       ├── report.py
 │       ├── writer.py
 │       └── main.py
+├── tests/
+│   ├── test_analyzer.py
+│   ├── test_client.py
+│   ├── test_report.py
+│   └── test_writer.py
 ├── data/
 │   └── output/
 │       └── reports/
@@ -93,6 +100,7 @@ Cette structure rend le code plus lisible, plus maintenable, plus testable et pl
 ```text
 Python 3.x
 requests
+pytest
 ```
 
 Installation des dépendances :
@@ -136,6 +144,42 @@ Chemin du rapport généré :
 data/output/reports/api_products_report.txt
 ```
 
+## Tests
+
+Le projet contient une suite de tests pytest couvrant les principales responsabilités du package :
+
+```text
+test_analyzer.py → teste les fonctions d’analyse pures, les cas limites, parametrize, fixtures et erreurs attendues
+test_report.py   → teste la génération du rapport texte via les informations importantes du contenu
+test_writer.py   → teste l’écriture fichier avec tmp_path sans polluer les vrais dossiers du projet
+test_client.py   → teste le client API avec monkeypatch sans appeler la vraie API
+```
+
+Lancer tous les tests depuis la racine du projet :
+
+```bash
+PYTHONPATH=src pytest -q
+```
+
+Pour un affichage détaillé :
+
+```bash
+PYTHONPATH=src pytest
+```
+
+La suite de tests actuelle valide :
+
+```text
+- les cas nominaux
+- les cas limites
+- les erreurs de champs manquants avec pytest.raises
+- les comparaisons de nombres décimaux avec pytest.approx
+- les cas répétés avec pytest.mark.parametrize
+- les données de test réutilisables avec les fixtures pytest
+- l’écriture dans des fichiers temporaires avec tmp_path
+- la simulation du comportement API avec monkeypatch
+```
+
 ## Compétences validées
 
 Ce projet valide la capacité à :
@@ -152,13 +196,16 @@ Ce projet valide la capacité à :
 - structurer du code Python en modules
 - séparer les responsabilités dans un package
 - exécuter un package avec python -m
+- écrire des tests unitaires utiles avec pytest
+- tester des fonctions pures, l’écriture fichier, la génération de rapport et le client API
+- isoler les dépendances externes dans les tests avec monkeypatch
 ```
 
 ## Statut du projet
 
-Le module principal d’apprentissage est terminé.
+Le module principal API et le mini-module pytest sont terminés.
 
-Blocs validés :
+Blocs API validés :
 
 ```text
 01 - Bases HTTP
@@ -176,13 +223,27 @@ Blocs validés :
 13 - Refactor en package src
 ```
 
+Blocs pytest validés :
+
+```text
+01 - Premiers tests unitaires avec pytest
+02 - Cas limites et erreurs attendues
+03 - Tests paramétrés avec pytest.mark.parametrize
+04 - Fixtures avec pytest.fixture
+05 - Test unitaire de génération de rapport
+06 - Test d’écriture fichier avec tmp_path
+07 - Tests du client API avec monkeypatch
+08 - Consolidation de la suite de tests et documentation README
+```
+
 ## Améliorations possibles
 
 ```text
-- ajouter des tests unitaires
-- renforcer la gestion d’erreurs
+- renforcer la gestion d’erreurs API
 - déplacer l’URL de base de l’API dans une configuration
 - filtrer les produits par catégorie
 - exporter les rapports en JSON ou CSV
-- finaliser le packaging avec pyproject.toml
+- ajouter GitHub Actions pour lancer pytest automatiquement
+- ajouter un rapport de couverture de tests
+- finaliser davantage le packaging avec pyproject.toml
 ```
